@@ -1,0 +1,116 @@
+:root {
+    --primary: #007BFF;
+    --warning: #FFC107;
+    --danger: #DC3545;
+    --success: #28A745;
+    --white: #FFFFFF;
+    --dark: #1D1D1D;
+  }
+  
+  .btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Button Colors and Styles */
+  
+  .btn--primary--solid {
+    box-shadow: 0 2px 4px 0 rgba(44, 39, 56, 0.08);
+  background-color: #007bff;
+
+color: var(--white) ;
+    border: none;
+  }
+  
+  .btn--warning--solid {
+    background-color: var(--warning);
+    color: var(--dark);
+    border: none;
+  }
+  
+  .btn--danger--solid {
+    background-color: var(--danger);
+    color: var(--white);
+    border: none;
+  }
+  
+  .btn--success--solid {
+    background-color: var(--success);
+    color: var(--white);
+    border: none;
+  }
+
+  .btn--white--solid {
+    background-color: var(--white);
+    color: var(--white);
+    border: none;
+  }
+  
+  .btn--primary--outline {
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+  }
+  
+  .btn--warning--outline {
+    background-color: transparent;
+    border: 2px solid var(--warning);
+    color: var(--warning);
+  }
+  
+  .btn--danger--outline {
+    background-color: transparent;
+    border: 2px solid var(--danger);
+    color: var(--danger);
+  }
+  
+  .btn--success--outline {
+    background-color: transparent;
+    border: 2px solid var(--success);
+    color: var(--success);
+  }
+  .btn--padding--small {
+    padding-left: 55px;
+    padding-right: 55px;
+  /* padding: 6px 16px; */
+    font-size: 12px;
+  }
+  /* Button Size */
+  .btn--small {
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+  
+  .btn--medium {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+  
+  .btn--large {
+    padding: 15px 30px;
+    font-size: 20px;
+  }
+  /* .seperator {
+    width: 100%;
+  }
+  
+  .controls-wrapper {
+    width: 100%;
+  }
+  
+  .carousel-wrapper {
+    width: 100%;
+  }
+  
+  .rec-carousel-item:focus {
+    outline: none;
+    box-shadow: inset 0 0 1px 0px violet;
+  }
+   */

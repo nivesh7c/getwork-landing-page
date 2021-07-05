@@ -1,0 +1,1 @@
+This repo is for GetWork's new repositories public domain developed in Next.js.

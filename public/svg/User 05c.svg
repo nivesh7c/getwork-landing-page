@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="137" height="137" viewBox="0 0 137 137">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffc9b3"/>
+      <stop offset="1" stop-color="#ffd2c2"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <circle id="Mask" cx="68.5" cy="68.5" r="68.5" fill="url(#linear-gradient)"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e6864e"/>
+      <stop offset="1" stop-color="#eb965e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.811" y1="0.188" x2="0.464" y2="1.089" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e07a3f"/>
+      <stop offset="1" stop-color="#eb9154"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1d0024"/>
+      <stop offset="1" stop-color="#100014"/>
+    </linearGradient>
+  </defs>
+  <g id="User_05c" data-name="User 05c" transform="translate(0.482)">
+    <circle id="Mask-2" data-name="Mask" cx="68.5" cy="68.5" r="68.5" transform="translate(-0.482)" fill="#97caff"/>
+    <g id="User_05c-2" data-name="User 05c" transform="translate(-0.482)" clip-path="url(#clip-path)">
+      <path id="face" d="M38.494,46.929v5.434c0,7.246,10.416,10.416,10.416,10.416s-12,9.057-24.455,9.057S0,62.779,0,62.779s10.5-3.17,10.416-10.416-.027-11.5-.082-23.917C3.844,20.033,4.26,14.387,7.809,10.416,19.7-2.887,52.08,1.642,52.08,1.642s3.022,32.6-3.849,42.117C45.287,47.834,38.494,46.929,38.494,46.929Z" transform="translate(45.311 31.87)" fill="url(#linear-gradient-2)"/>
+      <path id="shade" d="M15.85,5.434C5.887,4.3,0,0,0,0A26.214,26.214,0,0,0,15.85,10.869Z" transform="translate(67.954 73.364)" opacity="0.6" fill="url(#linear-gradient-3)" style="mix-blend-mode: multiply;isolation: isolate"/>
+      <path id="body" d="M101.9,16.9c4.311,8.766,6.793,28.983,6.793,28.983H0S2.483,25.659,6.793,16.9,36.274,0,36.274,0C41.126,9.965,67.752,9.964,72.4,0,72.4,0,97.584,8.129,101.9,16.9Z" transform="translate(15.422 91.479)" fill="#007bff"/>
+      <path id="buttons" d="M0,21.084a1.96,1.96,0,0,1,2-1.917A1.918,1.918,0,1,1,2,23,1.96,1.96,0,0,1,0,21.084ZM0,11.5A1.96,1.96,0,0,1,2,9.583a1.918,1.918,0,1,1,0,3.833A1.96,1.96,0,0,1,0,11.5ZM0,1.916A1.96,1.96,0,0,1,2,0,1.96,1.96,0,0,1,4,1.916,1.96,1.96,0,0,1,2,3.833,1.96,1.96,0,0,1,0,1.916Z" transform="translate(72 107)" fill="#fff"/>
+      <path id="hair" d="M18.638,33.154a4.6,4.6,0,0,0-5.664-.784C7.11,35.416,11.548,47.1,16.756,47.1c1.359,0,2.034,4.267-4.015,7.247,0-4.755-7.246-16.53-7.878-27.25C-2.43,24.381-.618,13.518,4.389,13.518c-.8-9.959,15.145-15.1,21.319-9.388C31.988-3.395,47.838.454,48.8,6.982c10.9-5.818,18.063,10.907,7.858,17.4-4.2,2.671-14.023,3.689-28.2,3.689-2.14,0-3.34.532-2.741,3.179C26.868,36.377,24.177,39.608,18.638,33.154Z" transform="translate(42.594 13.586)" fill="url(#linear-gradient-4)"/>
+    </g>
+  </g>
+</svg>
