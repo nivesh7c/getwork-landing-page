@@ -16,7 +16,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Mobile(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, applyButtonClicked, setApplyButtonClicked, filterIsApplied, sortBy, setSortBy } = props;
+  const {
+    filterData,
+    filterObject,
+    setFilterData,
+    setFilterObject,
+    setFilterIsApplied,
+    applyButtonClicked,
+    setApplyButtonClicked,
+    filterIsApplied,
+    sortBy,
+    setSortBy,
+    salary,
+    setSalary,
+    ppo,
+    setPPO,
+  } = props;
 
   const classes = useStyles();
 
@@ -35,6 +50,10 @@ export default function Mobile(props) {
                 applyButtonClicked={applyButtonClicked}
                 setApplyButtonClicked={setApplyButtonClicked}
                 filterIsApplied={filterIsApplied}
+                setPPO={setPPO}
+                ppo={ppo}
+                salary={salary}
+                setSalary={setSalary}
               />
             </Badge>
           </div>

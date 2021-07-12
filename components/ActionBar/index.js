@@ -43,7 +43,7 @@ function ActionBar(props) {
       console.log(temp);
 
       var found = Object.keys(filterData).find((element) => filterData[element].param_name === param_name);
-      if (param_name !== "job_role") handleToggle(key, found);
+      if (param_name !== "job_role_id") handleToggle(key, found);
       setFilterIsApplied(true);
     }
   };

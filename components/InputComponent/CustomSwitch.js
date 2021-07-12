@@ -1,8 +1,8 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React, { useEffect } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -13,18 +13,18 @@ const IOSSwitch = withStyles((theme) => ({
   },
   switchBase: {
     padding: 4,
-    '&$checked': {
-      transform: 'translateX(16px)',
+    "&$checked": {
+      transform: "translateX(16px)",
       color: theme.palette.common.white,
-      '& + $track': {
+      "& + $track": {
         backgroundColor: theme.palette.primary.main,
         opacity: 1,
-        border: 'none',
+        border: "none",
       },
     },
-    '&$focusVisible $thumb': {
-      color: '#52d869',
-      border: '6px solid #fff',
+    "&$focusVisible $thumb": {
+      color: "#52d869",
+      border: "6px solid #fff",
     },
   },
   thumb: {
@@ -36,7 +36,7 @@ const IOSSwitch = withStyles((theme) => ({
     border: `1px solid ${theme.palette.grey[400]}`,
     backgroundColor: theme.palette.grey[50],
     opacity: 1,
-    transition: theme.transitions.create(['background-color', 'border']),
+    transition: theme.transitions.create(["background-color", "border"]),
   },
   checked: {},
   focusVisible: {},
@@ -57,8 +57,8 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-export default function CustomSwitch() {
-  
+export default function CustomSwitch(props) {
+  const { ppo, setPPO, setFilterIsApplied, mobileView, applyButtonClicked } = props;
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
@@ -68,19 +68,32 @@ export default function CustomSwitch() {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+
+  useEffect(() => {
+    if (applyButtonClicked && mobileView) {
+      setFilterIsApplied(true);
+    }
+  }, [applyButtonClicked]);
   return (
     <>
-        
-        <div style={{display: 'flex',
-                     flexDirection: 'row',
-                    justifyContent: 'space-between',
-                     alignItems: 'center',}}> 
-        <Typography variant="caption" color='textSecondary' >Internships with Job Offers</Typography>
-        <FormControlLabel style={{margin:"0"}}
-        control={<IOSSwitch checked={state.checkedB} onChange={handleChange} name="checkedB" />}/>
-    
-        </div>
-   
-     </>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+        <Typography variant="caption" color="textSecondary">
+          Internships with Job Offers
+        </Typography>
+        <FormControlLabel
+          style={{ margin: "0" }}
+          control={
+            <IOSSwitch
+              checked={ppo}
+              onChange={(e) => {
+                setPPO(e.target.checked);
+                if (!mobileView) setFilterIsApplied(true);
+              }}
+              name="checkedB"
+            />
+          }
+        />
+      </div>
+    </>
   );
 }

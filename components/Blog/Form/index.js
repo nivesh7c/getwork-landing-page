@@ -1,47 +1,13 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import {
-  fade,
-  ThemeProvider,
-  withStyles,
-  makeStyles,
-  createMuiTheme,
-} from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import { green } from "@material-ui/core/colors";
 import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(5),
-    margin: "auto",
-    //maxWidth: 500,
-    // width:"60%",
-    borderRadius: "25px",
-    border: "solid 1.5px #e2e6ea",
-    boxShadow: "none",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: "auto",
-    display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
   },
   margin: {
     // margin: theme.spacing(1),
@@ -51,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: "32%",
     paddingRight: "32%",
     borderRadius: "30px",
+    padding: "12px",
     boxShadow: "none",
   },
 }));
@@ -116,9 +83,11 @@ export default function Form() {
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <CssTextFieldNew
+            multiline
             style={{ height: "200px" }}
             className={classes.margin}
             label="Message"
+            rows={9}
             variant="outlined"
             id="custom-css-outlined-input"
           />

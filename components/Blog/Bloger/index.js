@@ -4,8 +4,6 @@ import {
   Divider,
   Paper,
   Container,
-  Button,
-  Avatar,
   Grid,
   Chip,
   IconButton,
@@ -38,9 +36,12 @@ const useStyles = makeStyles(theme => ({
   img: {
     borderRadius: "50%",
   },
+  user: {
+    marginLeft: "5px",
+  },
 }));
 
-export default function BlogInfo() {
+export default function Bloger() {
   const classes = useStyles();
   return (
     <>
@@ -55,7 +56,7 @@ export default function BlogInfo() {
             }}
           >
             <Grid container spacing={1}>
-              <Grid item xs={2} md={1}>
+              <Grid item>
                 <Image
                   src="/png/collegebanner.png"
                   className={classes.img}
@@ -65,7 +66,7 @@ export default function BlogInfo() {
               </Grid>
               <div></div>
               <Grid item xs={6} md={2}>
-                <div style={{ marginLeft: "0px" }}>
+                <div className={classes.user}>
                   <Typography variant="h6">By Willie Farmer</Typography>
                   <Typography variant="body2">8 min ago</Typography>
                 </div>

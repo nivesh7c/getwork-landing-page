@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 export const getServerSideProps = async (ctx) => {
-  const url = `${NIYUKTI_API}/job/public/open-jobs`;
+  const url = `${NIYUKTI_API}/job/public/open-jobs?ppo=0`;
   const filter_url = `${NIYUKTI_API}/job/public/filter/open-jobs`;
   const job_role_url = `${NIYUKTI_API}/job/role/`;
 
@@ -63,6 +63,29 @@ function index({ data, filter_data, job_role_list }) {
   const [searchStringMade, setSearchStringMade] = useState(false);
   const [openFixFilter, setOpenFixFilter] = useState(false);
   const [sortBy, setSortBy] = useState({ name: "Recommended for you", value: "recommended" });
+
+  const checkIfSalary = () => {
+    var boole = 0;
+    Object.keys(router.query).map((item) => {
+      if (item === "ctc_min") {
+        boole = router.query[item];
+      }
+    });
+    return boole;
+  };
+  const [salary, setSalary] = useState();
+  const checkIfPPOTrue = () => {
+    var boole = false;
+    Object.keys(router.query).map((item) => {
+      if (item === "ppo" && Number(router.query[item]) === 1) {
+        boole = true;
+      }
+    });
+    return boole;
+  };
+
+  const [ppo, setPPO] = useState(checkIfPPOTrue());
+
   const checkString = () => {
     if (searchString) return `&${searchString}`;
     else return "";
@@ -76,8 +99,13 @@ function index({ data, filter_data, job_role_list }) {
     if (sortBy) return `&sort_by=${sortBy.value}`;
     else return "";
   };
+
+  const checkSalary = () => {
+    if (salary && salary !== 0) return `&ctc_min=${salary}`;
+    else return "";
+  };
   const fetchData = async () => {
-    var url = nextUrl ? `${nextUrl}` : `${NIYUKTI_API}/job/public/open-jobs?${checkString()}${checkSortJob()}`;
+    var url = nextUrl ? `${nextUrl}` : `${NIYUKTI_API}/job/public/open-jobs?${checkString()}${checkSortJob()}${checkSalary()}`;
 
     const res = await axios.get(url);
     console.log(res.data.data);
@@ -129,12 +157,12 @@ function index({ data, filter_data, job_role_list }) {
         heading: filter_data[head].heading,
         param_name: filter_data[head].param_name,
         data: arr,
+        field_type: filter_data[head].field_type,
       };
-
-      temp[filter_data[head].param_name] = CheckIfArray(filter_data[head].param_name, arr);
+      if (head !== "salary" && head !== "ppo") temp[filter_data[head].param_name] = CheckIfArray(filter_data[head].param_name, arr);
       // CheckIfArray(filter_data[head].param_name, arr);
     });
-    temp["job_role"] = checkIfJobRoleInUrl();
+    temp["job_role_id"] = checkIfJobRoleInUrl();
 
     setFilterObject(temp);
     setFilterData(newArr);
@@ -146,7 +174,7 @@ function index({ data, filter_data, job_role_list }) {
     var new_arr = [];
 
     Object.keys(router.query).map((item) => {
-      if (item === "job_role") {
+      if (item === "job_role_id") {
         var array = router.query[item].split(",");
         const nuevo = array.map((i) => Number(i));
         console.log(nuevo);
@@ -195,9 +223,9 @@ function index({ data, filter_data, job_role_list }) {
       Object.keys(filterObject).forEach((head, index) =>
         Object.keys(filterObject).indexOf(head) !== Object.keys(filterObject).length - 1
           ? (str += filterObject[head].length > 0 ? head + "=" + generateCsvWithoutSpacing(filterObject[head], "id") + "&" : "")
-          : (str += filterObject[head].length > 0 ? head + "=" + generateCsvWithoutSpacing(filterObject[head], "id") : "")
+          : (str += filterObject[head].length > 0 ? head + "=" + generateCsvWithoutSpacing(filterObject[head], "id") + "&" : "")
       );
-
+      str += `ppo=${ppo ? 1 : 0}&`;
       setSearchString(str);
       setSearchStringMade(true);
       console.log(str);
@@ -253,6 +281,10 @@ function index({ data, filter_data, job_role_list }) {
           jobRoleList={job_role_list}
           sortBy={sortBy}
           setSortBy={setSortBy}
+          setPPO={setPPO}
+          ppo={ppo}
+          salary={salary}
+          setSalary={setSalary}
         />
       </div>
     </>

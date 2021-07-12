@@ -8,8 +8,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import Image from "next/image";
-import FeaturedCard from "../../BlogGrid/FeaturedCard";
-import BlogInfo from "../../BlogInfo";
+import Bloger from "../Bloger/index";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,9 +27,23 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "50px",
     justifyContent: "space-between",
   },
+  btnItem: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "30px",
+  },
+  btn: {
+    backgroundColor: "#e2e6ea",
+    color: "black",
+    borderRadius: "30px",
+    paddingRight: "20px",
+    paddingLeft: "20px",
+  },
 }));
 
-export default function Header() {
+export default function BlogDescription() {
   const classes = useStyles();
   return (
     <>
@@ -41,7 +54,7 @@ export default function Header() {
           Hot Looks: A Fun, Random Beauty Report Straight From The Closet
         </Typography>
         <br />
-        <BlogInfo />
+        <Bloger />
         <div>
           <img src="/png/collegebanner.png" height="100%" width="100%" />
         </div>
@@ -102,45 +115,18 @@ export default function Header() {
         <br />
         <br />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            style={{
-              backgroundColor: "#e2e6ea",
-              color: "black",
-              borderRadius: "30px",
-              paddingRight: "30px",
-              paddingLeft: "30px",
-            }}
-          >
-            <Typography variant="body2">Preview</Typography>
+        <div className={classes.btnItem}>
+          <Button className={classes.btn}>
+            <Typography variant="body2">Previous</Typography>
           </Button>
 
           <div
             style={{ backgroundColor: "black", height: "1px", width: "100%" }}
           ></div>
-          <Button
-            style={{
-              backgroundColor: "#e2e6ea",
-              color: "black",
-              borderRadius: "30px",
-              paddingRight: "10px",
-              paddingLeft: "10px",
-            }}
-          >
+          <Button className={classes.btn}>
             <Typography variant="body2">Next</Typography>
           </Button>
         </div>
-        <br />
-        <br />
-
-        {/* <div style={{width:"100px",height:"5px", backgroundColor:"#007bff", borderRadius:"30px" }} ></div> */}
       </Container>
     </>
   );

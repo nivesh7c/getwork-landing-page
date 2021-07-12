@@ -61,7 +61,7 @@ export default function RegisterCard() {
         <div style={{ display: "flex", flexDirection: "row", flexWrap: "nowrap", justifyContent: "center" }}>
           <CustomButton
             onClick={() => {
-              console.log("You Clicked on Me!");
+              window.open("https://app.getwork.org/signup/student");
             }}
             type="button"
             buttonStyle="btn--primary--solid"

@@ -42,6 +42,10 @@ export default function OpenJob(props) {
     jobRoleList,
     sortBy,
     setSortBy,
+    setPPO,
+    ppo,
+    salary,
+    setSalary,
   } = props;
   const classes = useStyles();
   useEffect(() => {
@@ -73,6 +77,10 @@ export default function OpenJob(props) {
                 setFilterObject={setFilterObject}
                 setFilterIsApplied={setFilterIsApplied}
                 filterIsApplied={filterIsApplied}
+                setPPO={setPPO}
+                ppo={ppo}
+                salary={salary}
+                setSalary={setSalary}
               />
               {openFixFilter && (
                 <StickyFilter
@@ -82,6 +90,10 @@ export default function OpenJob(props) {
                   setFilterObject={setFilterObject}
                   setFilterIsApplied={setFilterIsApplied}
                   filterIsApplied={filterIsApplied}
+                  setPPO={setPPO}
+                  ppo={ppo}
+                  salary={salary}
+                  setSalary={setSalary}
                 />
               )}
             </Hidden>
@@ -122,6 +134,10 @@ export default function OpenJob(props) {
           filterIsApplied={filterIsApplied}
           sortBy={sortBy}
           setSortBy={setSortBy}
+          setPPO={setPPO}
+          ppo={ppo}
+          salary={salary}
+          setSalary={setSalary}
         />
       </Hidden>
     </>

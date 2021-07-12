@@ -5,29 +5,6 @@ import Image from "next/image";
 import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.common.black,
-    borderRadius: "15px",
-    backgroundColor: theme.palette.common.white,
-    border: "solid 1px #007bff",
-    boxShadow: "none",
-  },
-  img: {
-    display: "flex",
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  cd: {
-    color: "red",
-  },
-
-  demo: {
-    borderRadius: "30px",
-  },
   mainFeaturedPost: {
     position: "relative",
     backgroundColor: theme.palette.grey[800],
@@ -62,7 +39,6 @@ const useStyles = makeStyles(theme => ({
     height: "200px",
     borderRadius: "12px",
     boxShadow: "none",
-
     border: "none",
     color: "black",
     padding: theme.spacing(5),
@@ -71,23 +47,13 @@ const useStyles = makeStyles(theme => ({
       paddingRight: 0,
     },
   },
-  ch: {
-    color: "white",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-    backgroundColor: "black",
-  },
 }));
 export default function FeaturedCard() {
   const classes = useStyles();
   return (
     <>
       <div>
-        <Paper
-          className={classes.mainFeaturedPost}
-          style={{ backgroundImage: "/png/collegebanner.png" }}
-        >
-          {/* Increase the priority of the hero background image */}
+        <Paper className={classes.mainFeaturedPost}>
           {
             // <img
             //   style={{ display: "none" }}

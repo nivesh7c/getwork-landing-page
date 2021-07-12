@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function StickyFilter(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied } = props;
+  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied, setPPO, ppo, salary, setSalary } = props;
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.container, classes.fixedHeight);
   const [currentSearchValue, setCurrentSearchValue] = useState({});
@@ -89,31 +89,40 @@ export default function StickyFilter(props) {
       <Divider />
       {Object.keys(filterData).map((heading, index) => (
         <>
-          <FilterItem
-            heading={heading}
-            index={index}
-            filterObject={filterObject}
-            setFilterObject={setFilterObject}
-            filterData={filterData}
-            setFilterData={setFilterData}
-            setFilterIsApplied={setFilterIsApplied}
-            filterIsApplied={filterIsApplied}
-            fixInSide={true}
-          />
-          <CustomAutoComplete
-            heading={heading}
-            index={index}
-            filterObject={filterObject}
-            setFilterObject={setFilterObject}
-            filterData={filterData}
-            setFilterData={setFilterData}
-            setFilterIsApplied={setFilterIsApplied}
-            filterIsApplied={filterIsApplied}
-          />
+          {(filterData[heading].field_type === "autocomplete_true" || filterData[heading].field_type === "autocomplete_false") && (
+            <>
+              <FilterItem
+                heading={heading}
+                index={index}
+                filterObject={filterObject}
+                setFilterObject={setFilterObject}
+                filterData={filterData}
+                setFilterData={setFilterData}
+                setFilterIsApplied={setFilterIsApplied}
+                filterIsApplied={filterIsApplied}
+                fixInSide={true}
+              />
+              {filterData[heading].field_type === "autocomplete_true" && (
+                <CustomAutoComplete
+                  heading={heading}
+                  index={index}
+                  filterObject={filterObject}
+                  setFilterObject={setFilterObject}
+                  filterData={filterData}
+                  setFilterData={setFilterData}
+                  setFilterIsApplied={setFilterIsApplied}
+                  filterIsApplied={filterIsApplied}
+                />
+              )}
+            </>
+          )}
+
+          {filterData[heading].field_type === "toggle_button" && <CustomSwitch ppo={ppo} setPPO={setPPO} setFilterIsApplied={setFilterIsApplied} />}
+          {filterData[heading].field_type === "slider" && (
+            <FilterAmount heading={heading} filterData={filterData} salary={salary} setSalary={setSalary} setFilterIsApplied={setFilterIsApplied} />
+          )}
         </>
       ))}
-      <CustomSwitch />
-      <FilterAmount />
     </Container>
     // </main>
   );

@@ -1,8 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper, Grid, Chip } from "@material-ui/core";
+import { Typography, Paper, Grid, Chip, Link } from "@material-ui/core";
 import Image from "next/image";
-import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   // img: {
@@ -53,10 +52,7 @@ export default function ChipBlogCard() {
   return (
     <>
       <div>
-        <Paper
-          className={classes.mainFeaturedPost}
-          style={{ backgroundImage: "/png/collegebanner.png" }}
-        >
+        <Paper className={classes.mainFeaturedPost}>
           {/* {
             <img
               style={{ display: "none" }}

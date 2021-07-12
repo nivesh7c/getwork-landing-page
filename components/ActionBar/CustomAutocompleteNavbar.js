@@ -71,11 +71,11 @@ export default function CustomAutoComplete(props) {
 
   useEffect(() => {
     if (currentJobRole) {
-      var arr = filterObject["job_role"];
+      var arr = filterObject["job_role_id"];
       var temp = filterObject;
 
       arr.push({ id: currentJobRole.id, name: currentJobRole.job_role_name });
-      temp["job_role"] = arr;
+      temp["job_role_id"] = arr;
       setFilterObject(temp);
       console.log(temp);
       setFilterIsApplied(true);

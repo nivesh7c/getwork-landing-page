@@ -33,7 +33,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function DialogFilter(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, applyButtonClicked, setApplyButtonClicked, filterIsApplied } = props;
+  const {
+    filterData,
+    filterObject,
+    setFilterData,
+    setFilterObject,
+    setFilterIsApplied,
+    applyButtonClicked,
+    setApplyButtonClicked,
+    filterIsApplied,
+    salary,
+    setSalary,
+    ppo,
+    setPPO,
+  } = props;
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -90,6 +103,8 @@ export default function DialogFilter(props) {
     });
     setFilterObject(temp);
     setFilterData(dict);
+    setSalary();
+    setPPO(false);
     setApplyButtonClicked(true);
     handleClose();
   };
@@ -141,6 +156,10 @@ export default function DialogFilter(props) {
           setFilterIsApplied={setFilterIsApplied}
           applyButtonClicked={applyButtonClicked}
           filterIsApplied={filterIsApplied}
+          setPPO={setPPO}
+          ppo={ppo}
+          salary={salary}
+          setSalary={setSalary}
         />
         <Divider />
 

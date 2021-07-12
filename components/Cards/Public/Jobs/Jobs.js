@@ -77,7 +77,7 @@ export default function Jobs(props) {
                 <Hidden smDown>
                   <CustomButton
                     onClick={() => {
-                      console.log("You Clicked on Me!");
+                      window.open("https://app.getwork.org/signup/student");
                     }}
                     type="button"
                     buttonStyle="btn--primary--solid"
@@ -91,7 +91,7 @@ export default function Jobs(props) {
                 <Hidden smUp>
                   <CustomButton
                     onClick={() => {
-                      console.log("You Clicked on Me!");
+                      window.open("https://app.getwork.org/signup/student");
                     }}
                     type="button"
                     buttonStyle="btn--primary--solid"

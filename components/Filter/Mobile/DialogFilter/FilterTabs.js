@@ -9,6 +9,7 @@ import { Divider, FormControlLabel, Checkbox } from "@material-ui/core";
 import FilterAmount from "../../FilterAmount";
 import ListData from "../../ListData";
 import CustomAutoComplete from "../../../InputComponent/CustomAutoComplete";
+import CustomSwitch from "../../../InputComponent/CustomSwitch";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewDemo(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, applyButtonClicked, filterIsApplied } = props;
+  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, applyButtonClicked, filterIsApplied, salary, setSalary, ppo, setPPO } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -70,52 +71,57 @@ export default function NewDemo(props) {
       </Tabs>
 
       {Object.keys(filterData).map((heading, index) => (
-        <TabPanel value={value} index={index}>
-          <CustomAutoComplete
-            heading={heading}
-            index={index}
-            filterObject={filterObject}
-            setFilterObject={setFilterObject}
-            filterData={filterData}
-            setFilterData={setFilterData}
-            setFilterIsApplied={setFilterIsApplied}
-            mobileFilter={true}
-            applyButtonClicked={applyButtonClicked}
-            filterIsApplied={filterIsApplied}
-          />
-          <ListData
-            heading={heading}
-            index={index}
-            filterObject={filterObject}
-            setFilterObject={setFilterObject}
-            filterData={filterData}
-            setFilterData={setFilterData}
-            setFilterIsApplied={setFilterIsApplied}
-            mobileFilter={true}
-            applyButtonClicked={applyButtonClicked}
-            filterIsApplied={filterIsApplied}
-          />
-        </TabPanel>
+        <>
+          {(filterData[heading].field_type === "autocomplete_true" || filterData[heading].field_type === "autocomplete_false") && (
+            <TabPanel value={value} index={index}>
+              {filterData[heading].field_type === "autocomplete_true" && (
+                <CustomAutoComplete
+                  heading={heading}
+                  index={index}
+                  filterObject={filterObject}
+                  setFilterObject={setFilterObject}
+                  filterData={filterData}
+                  setFilterData={setFilterData}
+                  setFilterIsApplied={setFilterIsApplied}
+                  mobileFilter={true}
+                  applyButtonClicked={applyButtonClicked}
+                  filterIsApplied={filterIsApplied}
+                />
+              )}
+              <ListData
+                heading={heading}
+                index={index}
+                filterObject={filterObject}
+                setFilterObject={setFilterObject}
+                filterData={filterData}
+                setFilterData={setFilterData}
+                setFilterIsApplied={setFilterIsApplied}
+                mobileFilter={true}
+                applyButtonClicked={applyButtonClicked}
+                filterIsApplied={filterIsApplied}
+              />
+            </TabPanel>
+          )}
+          {filterData[heading].field_type === "toggle_button" && (
+            <TabPanel value={value} index={index}>
+              <CustomSwitch ppo={ppo} setPPO={setPPO} setFilterIsApplied={setFilterIsApplied} mobileView={true} applyButtonClicked={applyButtonClicked} />
+            </TabPanel>
+          )}
+          {filterData[heading].field_type === "slider" && (
+            <TabPanel value={value} index={index}>
+              <FilterAmount
+                heading={heading}
+                filterData={filterData}
+                salary={salary}
+                setSalary={setSalary}
+                setFilterIsApplied={setFilterIsApplied}
+                mobileView={true}
+                applyButtonClicked={applyButtonClicked}
+              />
+            </TabPanel>
+          )}
+        </>
       ))}
-
-      {/* <TabPanel value={value} index={5}>
-         
-      <FormControlLabel
-          value="end"
-          control={<Checkbox color="primary" />}
-          label="Yes"
-          labelPlacement="end"
-        />
-          <FormControlLabel
-          value="end"
-          control={<Checkbox color="primary" />}
-          label="No"
-          labelPlacement="end"
-        />
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-      <FilterAmount/>
-      </TabPanel>       */}
     </div>
   );
 }
