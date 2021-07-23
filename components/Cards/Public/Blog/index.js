@@ -7,31 +7,46 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment";
+import Link from "next/link";
+import { STRAPI_API } from "../../../../constant";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    border: "solid 0.5px #b0b6ba",
+    border: "solid 0.5px #f1f1f1",
     boxShadow: "none",
+    borderRadius: 10,
   },
 });
 
-export default function Blog() {
+export default function Blog({ item, fromSlug, fetchData, setButtonClicked }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia component="img" alt="Contemplative Reptile" height="140" image="/png/up.jpg" title="Contemplative Reptile" />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            By <span style={{ fontSize: "18px", color: "black" }}> Abdullah</span> | 03 March 2019
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Increasing Prosperity With Positive Thinking
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Link as={`/blog/${item?.Title.split(" ").join("_")}=${item?.id}`} href="/blog/[slug]">
+      <Card
+        className={classes.root}
+        onClick={() => {
+          if (fromSlug) {
+            setButtonClicked(true);
+            fetchData(item?.id);
+          }
+        }}
+      >
+        <CardActionArea>
+          <CardMedia component="img" alt="Contemplative Reptile" height="140" image={`${STRAPI_API}${item.Banner.formats.thumbnail.url}`} title="Contemplative Reptile" />
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              By <span style={{ fontSize: "18px", color: "black" }}> {item?.author?.FirstName + " " + item?.author?.LastName}</span> |{" "}
+              {moment(item.created_at).format("DD MMMM YYYY")}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              {item.Title}{" "}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Link>
   );
 }

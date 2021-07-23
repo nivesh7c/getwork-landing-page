@@ -6,29 +6,26 @@ import React, { Children } from "react";
 const ActiveLink = ({ children, activeClassName, ...props }) => {
   const { asPath } = useRouter();
   const child = Children.only(children);
+  console.log("new", child);
   const childClassName = child.props.className || "";
 
-  const className =
-    asPath === props.href || asPath === props.as
-      ? `${childClassName} ${activeClassName}`.trim()
-      : childClassName;
+  // pages/index.js will be matched via props.href
+  // pages/about.js will be matched via props.href
+  // pages/[slug].js will be matched via props.as
+  const className = asPath === props.href || asPath === props.as ? `${childClassName} ${activeClassName}`.trim() : childClassName;
+  console.log("new", className);
 
   return (
-    <Link
-      {...props}
-      //   style={{
-      //     textDecoration: "none",
-      //     margin: 0,
-      //     padding: 0,
-      //     fontWeight: asPath ? "bold" : "normal",
-      //     color: asPath ? "#007bff" : "#000000",
-      //   }}
-    >
+    <Link {...props}>
       {React.cloneElement(child, {
-        className: className || null,
+        className: childClassName || null,
       })}
     </Link>
   );
+};
+
+ActiveLink.propTypes = {
+  activeClassName: PropTypes.string.isRequired,
 };
 
 export default ActiveLink;

@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 
   tooltiptext: {
     visibility: "visible",
-    width: "200px",
+    width: "230px",
     boxShadow: "rgba(149 157 165 0.2) 0px 8px 24px",
     backgroundColor: "white",
     color: "#000",
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function LeftToolTip() {
+export default function LeftToolTip(props) {
   const classes = useStyles();
   return (
     <>
@@ -42,9 +42,7 @@ export default function LeftToolTip() {
           width="60px"
         />
         <span className={classes.tooltiptext}>
-          <Typography variant="subtitle2">
-            I can help you in Interviews
-          </Typography>
+          <Typography variant="subtitle2">{props.children}</Typography>
         </span>
       </div>
     </>

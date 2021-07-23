@@ -9,18 +9,17 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ChipBlogCard from "../BlogGrid/ChipBlogCard";
 import BlogPaper from "../BlogGrid/BlogPaper";
-
+import { useRouter } from "next/router";
+import college from "../../../public/svg/college.svg";
+import graduated from "../../../public/svg/graduated.svg";
+import officebuilding from "../../../public/svg/office-building.svg";
+import Blog from "../../Cards/Public/Blog";
+import Link from "next/link";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`full-width-tabpanel-${index}`} aria-labelledby={`full-width-tab-${index}`} {...other}>
       {value === index && (
         <Box p={1.2}>
           <Typography>{children}</Typography>
@@ -43,7 +42,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "70px",
     width: "auto",
@@ -52,51 +51,85 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MobileTab() {
+export default function MobileTab({ data }) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const router = useRouter();
 
+  const Data = [
+    {
+      img: graduated,
+      title: "All Blogs",
+      link: "all",
+      as: "/blog",
+      href: "/blog",
+      selected: router.query.category !== "students" && router.query.category !== "company" && router.query.category !== "college" ? true : false,
+    },
+    {
+      img: graduated,
+      title: "Students",
+      link: "student",
+      as: "/blogs/students",
+      href: "/blogs/[category]",
+      selected: router.query.category === "students" ? true : false,
+    },
+    {
+      img: college,
+      title: "Colleges",
+      link: "college",
+      as: "/blogs/college",
+      href: "/blogs/[category]",
+      selected: router.query.category === "college" ? true : false,
+    },
+    {
+      img: officebuilding,
+      title: "Companies",
+      link: "company",
+      as: "/blogs/company",
+      href: "/blogs/[category]",
+      selected: router.query.category === "company" ? true : false,
+    },
+  ];
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleChangeIndex = index => {
+  const handleChangeIndex = (index) => {
     setValue(index);
+  };
+  const checkValue = () => {
+    var value = 0;
+    if (router.query.category === "students") value = 1;
+    else if (router.query.category === "college") value = 2;
+    else if (router.query.category === "company") value = 3;
+    else value = 0;
+
+    return value;
   };
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default" style={{ boxShadow: "none" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Students" {...a11yProps(0)} />
-          <Tab label="Colleges" {...a11yProps(1)} />
-          <Tab label="Companies" {...a11yProps(2)} />
+        <Tabs value={checkValue()} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+          {Data.map((item, index) => (
+            <Link as={item.as} href={item.href}>
+              <Tab label={item.title} {...a11yProps(index)} />
+            </Link>
+          ))}
         </Tabs>
       </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <ChipBlogCard />
-          <BlogPaper />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <ChipBlogCard />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <ChipBlogCard />
-        </TabPanel>
-      </SwipeableViews>
+      {/* <SwipeableViews axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={value} onChangeIndex={handleChangeIndex}> */}
+      {data.map((item, index) => (
+        <>
+          <TabPanel dir={theme.direction}>
+            {/* <ChipBlogCard item={item} /> */}
+            <Blog item={item} />
+            {/* <BlogPaper /> */}
+          </TabPanel>
+        </>
+      ))}
+      {/* </SwipeableViews> */}
     </div>
   );
 }

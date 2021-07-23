@@ -52,7 +52,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewDemo(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, applyButtonClicked, filterIsApplied, salary, setSalary, ppo, setPPO } = props;
+  const {
+    filterData,
+    filterObject,
+    setFilterData,
+    setFilterObject,
+    setFilterIsApplied,
+    applyButtonClicked,
+    filterIsApplied,
+    salary,
+    setSalary,
+    ppo,
+    setPPO,
+    listData,
+    setListData,
+  } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -86,6 +100,8 @@ export default function NewDemo(props) {
                   mobileFilter={true}
                   applyButtonClicked={applyButtonClicked}
                   filterIsApplied={filterIsApplied}
+                  listData={listData}
+                  setListData={setListData}
                 />
               )}
               <ListData
@@ -99,6 +115,8 @@ export default function NewDemo(props) {
                 mobileFilter={true}
                 applyButtonClicked={applyButtonClicked}
                 filterIsApplied={filterIsApplied}
+                listData={listData}
+                setListData={setListData}
               />
             </TabPanel>
           )}

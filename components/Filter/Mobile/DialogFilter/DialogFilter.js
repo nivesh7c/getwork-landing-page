@@ -46,6 +46,8 @@ export default function DialogFilter(props) {
     setSalary,
     ppo,
     setPPO,
+    listData,
+    setListData,
   } = props;
 
   const classes = useStyles();
@@ -86,8 +88,10 @@ export default function DialogFilter(props) {
     temp.splice(index, 1, item);
     var temp2 = { ...filterData };
     temp2[heading].data = temp;
-
+    var temp_new = { ...listData };
+    temp_new[heading] = temp.slice(0, 5);
     setFilterData(temp2);
+    setListData(temp_new);
   };
 
   const handleClearAll = () => {
@@ -160,6 +164,8 @@ export default function DialogFilter(props) {
           ppo={ppo}
           salary={salary}
           setSalary={setSalary}
+          listData={listData}
+          setListData={setListData}
         />
         <Divider />
 

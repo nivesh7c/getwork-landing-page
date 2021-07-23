@@ -1,6 +1,8 @@
 import React from "react";
 import { Parallax } from "react-parallax";
 import { Typography, Hidden } from "@material-ui/core";
+import { CustomButton } from "../InputComponent/Button/CustomButton";
+import Link from "next/link";
 
 const insideStyles = {
   color: "white",
@@ -28,6 +30,19 @@ function Banner() {
                   </span>{" "}
                   For <span style={{ color: "#007bff" }}>Free </span>
                 </Typography>
+                <div style={{ marginTop: "50px" }}>
+                  <Link href="post-job">
+                    <CustomButton
+                      type="button"
+                      buttonStyle="btn--primary--solid"
+                      buttonSize="btn--medium"
+                    >
+                      <Typography variant="body2" color="inherit">
+                        Post A Jobs
+                      </Typography>
+                    </CustomButton>
+                  </Link>
+                </div>
               </div>
             </Hidden>
             <Hidden smUp>
@@ -41,6 +56,17 @@ function Banner() {
                   </span>{" "}
                   For <span style={{ color: "#007bff" }}>Free </span>
                 </Typography>
+                <Link href="post-job">
+                  <CustomButton
+                    type="button"
+                    buttonStyle="btn--primary--solid"
+                    buttonSize="btn--medium"
+                  >
+                    <Typography variant="body2" color="inherit">
+                      Post A Jobs
+                    </Typography>
+                  </CustomButton>
+                </Link>
               </div>
             </Hidden>
           </div>

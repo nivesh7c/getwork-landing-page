@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CheckboxList(props) {
-  const { heading, index, filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, mobileFilter, applyButtonClicked, filterIsApplied } = props;
+  const { heading, index, filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, mobileFilter, applyButtonClicked, filterIsApplied, listData, setListData } =
+    props;
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
-
   const handleToggle = (e, item) => {
     if (item.isChecked === false) {
       var arr = filterObject[filterData[heading].param_name];
@@ -36,7 +36,7 @@ export default function CheckboxList(props) {
       setFilterObject(temp);
     } else {
       var arr = filterObject[filterData[heading].param_name];
-
+      var arr_new = listData[heading];
       var temp = filterObject;
 
       var indexx;
@@ -47,7 +47,10 @@ export default function CheckboxList(props) {
       });
       arr.splice(indexx, 1);
       temp[filterData[heading].param_name] = arr;
+      var temp_new = { ...listData };
+      temp_new[heading] = arr_new.slice(0, 5);
       setFilterObject(temp);
+      setListData(temp_new);
     }
     var temp = [...filterData[heading].data];
 
@@ -72,7 +75,7 @@ export default function CheckboxList(props) {
 
   return (
     <List className={classes.root}>
-      {filterData[heading].data.slice(0, 5).map((value, in_index) => {
+      {listData[heading]?.map((value, in_index) => {
         const labelId = `checkbox-list-label-${in_index}`;
 
         return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dialog, List, ListItem, ListItemText, Divider, Slide, Typography } from "@material-ui/core";
+import { Button, Dialog, List, ListItem, ListItemText, ListItemIcon, Divider, Slide, Typography } from "@material-ui/core";
 import SwapVertIcon from "@material-ui/icons/SwapVert";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +67,11 @@ export default function DialogSort(props) {
               }}
             >
               <ListItemText primary="Recommended for You" />
+              {sortBy.value === "recommended" && (
+                <ListItemIcon>
+                  <img src="/png/tick.png" height="18px" />{" "}
+                </ListItemIcon>
+              )}
             </ListItem>
             <ListItem
               button
@@ -77,6 +82,11 @@ export default function DialogSort(props) {
             >
               {" "}
               <ListItemText primary="Latest Jobs" />
+              {sortBy.value === "latest" && (
+                <ListItemIcon>
+                  <img src="/png/tick.png" height="18px" />{" "}
+                </ListItemIcon>
+              )}
             </ListItem>
             <ListItem
               button
@@ -87,6 +97,11 @@ export default function DialogSort(props) {
             >
               {" "}
               <ListItemText primary="Popular Jobs" />
+              {sortBy.value === "popular" && (
+                <ListItemIcon>
+                  <img src="/png/tick.png" height="18px" />{" "}
+                </ListItemIcon>
+              )}
             </ListItem>
           </List>
         </List>

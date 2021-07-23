@@ -2,7 +2,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CssTextField from "./CssTextField";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,9 +61,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function CustomAutoComplete(props) {
   const classes = useStyles();
-  const { heading, index, filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, mobileFilter, applyButtonClicked, filterIsApplied } = props;
+  const { heading, index, filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, mobileFilter, applyButtonClicked, filterIsApplied, listData, setListData } =
+    props;
   const [currentSearchValue, setCurrentSearchValue] = useState({});
-
+  useEffect(() => {
+    console.log("new", listData);
+  }, [listData]);
   return (
     <>
       {/* <div className={classes.search}> */}
@@ -92,10 +95,15 @@ export default function CustomAutoComplete(props) {
         onChange={(event, newValue) => {
           if (newValue) {
             var arr = filterObject[filterData[heading].param_name];
+            var arr_list = [...listData[heading]];
             var temp = filterObject;
+            var temp_new = listData;
             arr.push(newValue);
+            arr_list.push({ id: newValue.id, name: newValue.name, isChecked: true });
             temp[filterData[heading].param_name] = arr;
+            temp_new[heading] = arr_list;
             setFilterObject(temp);
+            setListData(temp_new);
             if (!mobileFilter) setFilterIsApplied(true);
           }
         }}

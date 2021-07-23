@@ -1,9 +1,11 @@
 import Navbar from "../components/Common/Navbar/index";
-const Layout = props => {
+import Footer from "../components/Student/Footer";
+const Layout = (props) => {
   return (
     <>
       <Navbar />
       {props.children}
+      <Footer />
     </>
   );
 };

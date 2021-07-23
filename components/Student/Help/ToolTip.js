@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Image from "next/image";
+import { Children } from "react";
 const useStyles = makeStyles(theme => ({
   img: {
     borderRadius: "50%",
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ToolTip() {
+export default function ToolTip(props) {
   const classes = useStyles();
   return (
     <>
@@ -42,9 +43,7 @@ export default function ToolTip() {
           width="60px"
         />
         <span className={classes.tooltiptext}>
-          <Typography variant="subtitle2">
-            I can help you in Interviews
-          </Typography>
+          <Typography variant="subtitle2">{props.children}</Typography>
         </span>
       </div>
     </>

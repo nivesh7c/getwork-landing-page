@@ -44,10 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Filter(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied, setPPO, ppo, salary, setSalary } = props;
+  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied, setPPO, ppo, salary, setSalary, listData, setListData } = props;
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.container, classes.fixedHeight);
   const [currentSearchValue, setCurrentSearchValue] = useState({});
+
   return (
     // <main className={classes.content}>
     <Container className={fixedHeightPaper}>
@@ -75,6 +76,8 @@ export default function Filter(props) {
                   setFilterData={setFilterData}
                   setFilterIsApplied={setFilterIsApplied}
                   filterIsApplied={filterIsApplied}
+                  listData={listData}
+                  setListData={setListData}
                 />
                 {filterData[heading].field_type === "autocomplete_true" && (
                   <CustomAutoComplete
@@ -86,6 +89,8 @@ export default function Filter(props) {
                     setFilterData={setFilterData}
                     setFilterIsApplied={setFilterIsApplied}
                     filterIsApplied={filterIsApplied}
+                    listData={listData}
+                    setListData={setListData}
                   />
                 )}
               </>

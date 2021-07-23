@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
   header: {
     paddingLeft: "10px",
     paddingRight: "10px",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2),
+    },
     marginTop: "20px",
   },
 }));
@@ -61,13 +64,12 @@ export default function Mockup() {
                 </Typography>
                 <br />
                 <Typography variant="h2" className={classes.text}>
-                  Use your android or ios device to manage everything.
+                  The “Adda” of Jobs is Now on PlayStore.
                 </Typography>
                 <br />
                 <Typography variant="body1" className={classes.text}>
-                  Silent sir say desire fat him letter. Whatever settling
-                  goodness too and honoured she building answered her.Strongly
-                  thoughts remember mr to do consider.
+                  Get jobs for freshers and many more. Download the app to get
+                  personalised notifications daily.
                 </Typography>
                 <br />
                 <div>
@@ -94,6 +96,7 @@ export default function Mockup() {
             <Grid item xs style={{ display: "flex", justifyContent: "center" }}>
               <Image src="/svg/app_screen.svg" height="650px" width="320px" />
             </Grid>
+
             <Grid item xs md="4" className={classes.tab}>
               <CustomTab />
             </Grid>

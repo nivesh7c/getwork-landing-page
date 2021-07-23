@@ -77,7 +77,7 @@ export default function Jobs(props) {
                 <Hidden smDown>
                   <CustomButton
                     onClick={() => {
-                      window.open("https://app.getwork.org/signup/student");
+                      window.open("http://appreacttest.getwork.org/public/job/" + item.id);
                     }}
                     type="button"
                     buttonStyle="btn--primary--solid"
@@ -91,21 +91,21 @@ export default function Jobs(props) {
                 <Hidden smUp>
                   <CustomButton
                     onClick={() => {
-                      window.open("https://app.getwork.org/signup/student");
+                      window.open("http://appreacttest.getwork.org/public/job/" + item.id);
                     }}
                     type="button"
                     buttonStyle="btn--primary--solid"
                     buttonSize="btn--padding--small"
                   >
-                    <Typography variant="body2" color="inherit">
+                    <Typography variant="body2" color="inherit" style={{ paddingTop: 5, paddingBottom: 5 }}>
                       Apply Now
                     </Typography>
                   </CustomButton>
-                  <Button variant="contained" style={{ color: "white", backgroundColor: "black", borderRadius: "30px" }} endIcon={<BookmarkBorderIcon />}>
+                  {/* <Button variant="contained" style={{ color: "white", backgroundColor: "black", borderRadius: "30px" }} endIcon={<BookmarkBorderIcon />}>
                     <Typography variant="h6" color="inherit">
                       Save
                     </Typography>
-                  </Button>
+                  </Button> */}
                 </Hidden>
               </div>
               {/* </Hidden> */}

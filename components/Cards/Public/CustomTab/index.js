@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,15 +36,15 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
-    'aria-controls': `scrollable-force-tabpanel-${index}`,
+    "aria-controls": `scrollable-force-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    width: '100%',
-    color:"white",
+    width: "100%",
+    color: "white",
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -59,9 +59,18 @@ export default function CustomTab() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary"  style={{backgroundColor:"#007BFF", color:"white", border:"none", boxShadow:"none"}}>
+      <AppBar
+        position="static"
+        color="primary"
+        style={{
+          backgroundColor: "#007BFF",
+          color: "white",
+          border: "none",
+          boxShadow: "none",
+        }}
+      >
         <Tabs
-          style={{color: 'white'}}
+          style={{ color: "white" }}
           value={value}
           onChange={handleChange}
           variant="scrollable"
@@ -70,19 +79,45 @@ export default function CustomTab() {
           textColor="secondary"
           aria-label="scrollable force tabs example"
         >
-          <Tab  label={<span style={{ color: '#ffffff' }}>Job Applying</span>} {...a11yProps(0)} />
-          <Tab  label={<span style={{ color: '#ffffff' }}>Application Management</span>}  {...a11yProps(1)} />
-          <Tab  label={<span style={{ color: '#ffffff' }}>Application Tracking</span>} {...a11yProps(2)} />
-
+          <Tab
+            label={<span style={{ color: "#ffffff" }}>Job Alert</span>}
+            {...a11yProps(0)}
+          />
+          <Tab
+            label={
+              <span style={{ color: "#ffffff" }}>Application Management</span>
+            }
+            {...a11yProps(1)}
+          />
+          <Tab
+            label={
+              <span style={{ color: "#ffffff" }}>Application Tracking</span>
+            }
+            {...a11yProps(2)}
+          />
         </Tabs>
       </AppBar>
-      <TabPanel style={{backgroundColor:"#007BFF",color:"white"}} value={value} index={0}>
-      Silent sir say desire fat him letter. Whatever settling goodness too and honoured she building answered her. Strongly thoughts remember mr to do consider.
+      <TabPanel
+        style={{ backgroundColor: "#007BFF", color: "white" }}
+        value={value}
+        index={0}
+      >
+        Silent sir say desire fat him letter. Whatever settling goodness too and
+        honoured she building answered her. Strongly thoughts remember mr to do
+        consider.
       </TabPanel>
-      <TabPanel style={{backgroundColor:"#007BFF",color:"white"}} value={value} index={1}>
+      <TabPanel
+        style={{ backgroundColor: "#007BFF", color: "white" }}
+        value={value}
+        index={1}
+      >
         Item Two
       </TabPanel>
-      <TabPanel style={{backgroundColor:"#007BFF",color:"white"}} value={value} index={2}>
+      <TabPanel
+        style={{ backgroundColor: "#007BFF", color: "white" }}
+        value={value}
+        index={2}
+      >
         Item Three
       </TabPanel>
     </div>

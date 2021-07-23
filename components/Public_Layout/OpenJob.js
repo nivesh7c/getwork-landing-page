@@ -10,10 +10,13 @@ import ActionBar from "../ActionBar";
 import Mobile from "../Filter/Mobile";
 import JobCardSkeleton from "../JobCardSkeleton/JobCardSkeleton";
 import StickyFilter from "../Filter/StickyFilter";
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   header: {
     paddingLeft: "10px",
     paddingRight: "10px",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2),
+    },
     marginTop: "20px",
   },
   content: {
@@ -21,7 +24,7 @@ const useStyles = makeStyles({
     overflow: "auto",
     marginTop: "30px",
   },
-});
+}));
 
 export default function OpenJob(props) {
   const {
@@ -46,11 +49,15 @@ export default function OpenJob(props) {
     ppo,
     salary,
     setSalary,
+    listData,
+    setListData,
   } = props;
   const classes = useStyles();
+
   useEffect(() => {
     console.log(data);
   }, [data]);
+  var localStorage = require("localStorage");
 
   return (
     <>
@@ -63,6 +70,8 @@ export default function OpenJob(props) {
         jobRoleList={jobRoleList}
         sortBy={sortBy}
         setSortBy={setSortBy}
+        setListData={setListData}
+        listData={listData}
       />
 
       <Container maxWidth="lg" component="main" className={classes.header}>
@@ -81,6 +90,8 @@ export default function OpenJob(props) {
                 ppo={ppo}
                 salary={salary}
                 setSalary={setSalary}
+                listData={listData}
+                setListData={setListData}
               />
               {openFixFilter && (
                 <StickyFilter
@@ -94,6 +105,8 @@ export default function OpenJob(props) {
                   ppo={ppo}
                   salary={salary}
                   setSalary={setSalary}
+                  listData={listData}
+                  setListData={setListData}
                 />
               )}
             </Hidden>
@@ -112,8 +125,18 @@ export default function OpenJob(props) {
           </Grid>
           <Grid item md={3}>
             <Hidden only={["sm", "xs"]}>
-              <RegisterCard />
-              <UserInfo />
+              {/* <UserInfo /> */}
+              {!localStorage.getItem("gw_token") ? (
+                <RegisterCard />
+              ) : (
+                <>
+                  <UserInfo />
+
+                  {localStorage.getItem("user_type") === "College" && (
+                    <CompanyCard />
+                  )}
+                </>
+              )}{" "}
             </Hidden>
             {/* <CompanyCard/> */}
           </Grid>
@@ -138,6 +161,8 @@ export default function OpenJob(props) {
           ppo={ppo}
           salary={salary}
           setSalary={setSalary}
+          listData={listData}
+          setListData={setListData}
         />
       </Hidden>
     </>

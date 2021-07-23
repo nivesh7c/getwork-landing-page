@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function StickyFilter(props) {
-  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied, setPPO, ppo, salary, setSalary } = props;
+  const { filterData, filterObject, setFilterData, setFilterObject, setFilterIsApplied, filterIsApplied, setPPO, ppo, salary, setSalary, listData, setListData } = props;
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.container, classes.fixedHeight);
   const [currentSearchValue, setCurrentSearchValue] = useState({});
@@ -101,6 +101,8 @@ export default function StickyFilter(props) {
                 setFilterIsApplied={setFilterIsApplied}
                 filterIsApplied={filterIsApplied}
                 fixInSide={true}
+                listData={listData}
+                setListData={setListData}
               />
               {filterData[heading].field_type === "autocomplete_true" && (
                 <CustomAutoComplete
@@ -112,6 +114,8 @@ export default function StickyFilter(props) {
                   setFilterData={setFilterData}
                   setFilterIsApplied={setFilterIsApplied}
                   filterIsApplied={filterIsApplied}
+                  listData={listData}
+                  setListData={setListData}
                 />
               )}
             </>

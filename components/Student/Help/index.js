@@ -37,17 +37,17 @@ export default function Help() {
   return (
     <div className={classes.root}>
       <Hidden smUp>
-        <ToolTip />
+        <ToolTip>Get motivated and focused</ToolTip>
       </Hidden>
       <Grid container spacing={3}>
         <Grid item xs>
           <Hidden smDown>
             <div className={classes.desktoptooltip}>
               <div>
-                <ToolTip />
+                <ToolTip>Get motivated and focused</ToolTip>
               </div>
               <div className={classes.lefttoptooltip}>
-                <LeftToolTip />
+                <LeftToolTip>Get a Direction.</LeftToolTip>
               </div>
             </div>
           </Hidden>
@@ -59,8 +59,7 @@ export default function Help() {
             <br />
             <Typography variant="body2">
               {" "}
-              Whatever settling goodness too and honoured she building answered
-              her. Strongly thoughts
+              Connect to our experts for professional and personalised advice
             </Typography>
             <br />
             <Button
@@ -80,10 +79,10 @@ export default function Help() {
           <Hidden smDown>
             <div className={classes.desktoptooltip}>
               <div className={classes.lefttoptooltip}>
-                <LeftToolTip />
+                <LeftToolTip>Let’s build your career together</LeftToolTip>
               </div>
               <div className={classes.lefttooltip}>
-                <ToolTip />
+                <ToolTip>Let’s go achieve it</ToolTip>
               </div>
             </div>
           </Hidden>
@@ -95,7 +94,7 @@ export default function Help() {
         }}
       >
         <Hidden smUp>
-          <ToolTip />
+          <ToolTip>Let’s go achieve it</ToolTip>
         </Hidden>
       </div>
       <Hidden smUp>
@@ -107,7 +106,7 @@ export default function Help() {
             justifyContent: "flex-end",
           }}
         >
-          <LeftToolTip />
+          <LeftToolTip>Let’s build your career together </LeftToolTip>
         </div>
       </Hidden>
     </div>

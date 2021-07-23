@@ -7,6 +7,7 @@ import { httpRequest } from "../../../services/request";
 import { generateCsvWithoutSpacing } from "../../../utils/generateCsv";
 import { useRouter } from "next/router";
 import { makeStyles, Hidden } from "@material-ui/core";
+import { uniqueArray } from "../../../utils/uniqueArray";
 
 const useStyles = makeStyles({
   mainComponent: {
@@ -30,9 +31,9 @@ const useStyles = makeStyles({
   },
 });
 export const getServerSideProps = async (ctx) => {
-  const url = `${NIYUKTI_API}/job/public/open-jobs?ppo=0`;
-  const filter_url = `${NIYUKTI_API}/job/public/filter/open-jobs`;
-  const job_role_url = `${NIYUKTI_API}/job/role/`;
+  const url = `${NIYUKTI_API}job/public/open-jobs?ppo=0`;
+  const filter_url = `${NIYUKTI_API}job/public/filter/open-jobs`;
+  const job_role_url = `${NIYUKTI_API}job/role/`;
 
   const response = await axios.get(url);
   const filter_response = await axios.get(filter_url);
@@ -63,6 +64,7 @@ function index({ data, filter_data, job_role_list }) {
   const [searchStringMade, setSearchStringMade] = useState(false);
   const [openFixFilter, setOpenFixFilter] = useState(false);
   const [sortBy, setSortBy] = useState({ name: "Recommended for you", value: "recommended" });
+  const [listData, setListData] = useState({});
 
   const checkIfSalary = () => {
     var boole = 0;
@@ -73,7 +75,7 @@ function index({ data, filter_data, job_role_list }) {
     });
     return boole;
   };
-  const [salary, setSalary] = useState();
+  const [salary, setSalary] = useState(checkIfSalary());
   const checkIfPPOTrue = () => {
     var boole = false;
     Object.keys(router.query).map((item) => {
@@ -105,7 +107,7 @@ function index({ data, filter_data, job_role_list }) {
     else return "";
   };
   const fetchData = async () => {
-    var url = nextUrl ? `${nextUrl}` : `${NIYUKTI_API}/job/public/open-jobs?${checkString()}${checkSortJob()}${checkSalary()}`;
+    var url = nextUrl ? `${nextUrl}` : `${NIYUKTI_API}job/public/open-jobs?${checkString()}${checkSortJob()}${checkSalary()}`;
 
     const res = await axios.get(url);
     console.log(res.data.data);
@@ -146,6 +148,7 @@ function index({ data, filter_data, job_role_list }) {
     var newArr = {};
     var temp = {};
     var arr = [];
+    var obj = {};
 
     Object.keys(filter_data).forEach((head) => {
       arr = filter_data[head].data.map((v) => ({
@@ -159,13 +162,21 @@ function index({ data, filter_data, job_role_list }) {
         data: arr,
         field_type: filter_data[head].field_type,
       };
-      if (head !== "salary" && head !== "ppo") temp[filter_data[head].param_name] = CheckIfArray(filter_data[head].param_name, arr);
-      // CheckIfArray(filter_data[head].param_name, arr);
+      if (head !== "salary" && head !== "ppo") {
+        temp[filter_data[head].param_name] = CheckIfArray(filter_data[head].param_name, arr);
+        // CheckIfArray(filter_data[head].param_name, arr);
+        let temp_new = arr.filter((data) => data.isChecked === true);
+        var sum_arr = [...arr.slice(0, 5), ...temp_new];
+        var arr_find = uniqueArray(sum_arr);
+        console.log(arr_find);
+        obj[head] = arr_find;
+      }
     });
     temp["job_role_id"] = checkIfJobRoleInUrl();
 
     setFilterObject(temp);
     setFilterData(newArr);
+    setListData(obj);
 
     console.log(newArr);
   }, [filter_data]);
@@ -242,12 +253,12 @@ function index({ data, filter_data, job_role_list }) {
   }, [searchStringMade]);
 
   useEffect(() => {
-    window.history.pushState({}, null, `/public/jobs${checkStringForUrl()}`);
+    window.history.pushState({}, null, `/public/jobs${checkStringForUrl()}${checkSalary()}`);
   }, [searchStringMade]);
 
   useEffect(() => {
     window.onscroll = function (ev) {
-      if (window.innerHeight + window.scrollY >= 2500) {
+      if (window.innerHeight + window.scrollY >= 2500 && window.innerHeight + window.scrollY <= document.body.offsetHeight - 300) {
         setOpenFixFilter(true);
       } else {
         setOpenFixFilter(false);
@@ -285,6 +296,8 @@ function index({ data, filter_data, job_role_list }) {
           ppo={ppo}
           salary={salary}
           setSalary={setSalary}
+          listData={listData}
+          setListData={setListData}
         />
       </div>
     </>

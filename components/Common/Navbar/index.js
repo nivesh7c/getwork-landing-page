@@ -8,15 +8,17 @@ import {
   Hidden,
   IconButton,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
 import SideDrawer from "./SideDrawer";
-import { CustomButton } from "../../InputComponent/Button/CustomButton";
 import SearchIcon from "@material-ui/icons/Search";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ActiveLink from "./ActiveLink";
+import { useRouter } from "next/router";
+import LogInBtn from "./LogInBtn";
+import RegisterBtn from "./RegisterBtn";
+import DropDown from "./DropDown";
 const useStyles = makeStyles({
   appbar: {
     borderBottom: "1px solid #e2e6ea",
@@ -38,12 +40,14 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingLeft: "5px",
-    paddingRight: "5px",
+    //paddingLeft: "5px",
+    //paddingRight: "5px",
   },
   menuButton: {
     padding: "0px",
-    justifyContent: "flex-start",
+    // justifyContent: "flex-start",
+    display: "flex",
+    justifyContent: "center",
   },
   sectionDesktop: {
     display: "none",
@@ -56,8 +60,17 @@ const useStyles = makeStyles({
     },
     padding: "10px",
   },
+  btn_active: {
+    color: "#007bff",
+    padding: "10px",
+    fontWeight: "20px",
+  },
   tab: {
     borderRadius: "30px",
+  },
+  tab_active: {
+    borderRadius: "30px",
+    // backgroundColor: "#e8f3ff",
   },
 });
 
@@ -68,13 +81,13 @@ const navLinks = [
   { title: `Companies`, path: `/employer` },
   { title: `Colleges`, path: `/college` },
   { title: `Blogs`, path: `/blog` },
-  { title: `About us`, path: `/` },
-  { title: `Content us`, path: `/` },
+  { title: `About us`, path: `/about-us` },
+  { title: `Contact us`, path: `/contact-us` },
 ];
 
 function Navbar() {
   const classes = useStyles();
-
+  const router = useRouter();
   return (
     <AppBar position="fixed" elevation={0} className={classes.appbar}>
       <Toolbar className={classes.navbar}>
@@ -104,44 +117,117 @@ function Navbar() {
 
             <div className={classes.navtab}>
               <ActiveLink href="/students">
-                <Button color="primary" className={classes.tab}>
-                  <Typography variant="body2" className={classes.btn}>
+                <Button
+                  color="primary"
+                  className={
+                    router.pathname === "/students"
+                      ? classes.tab_active
+                      : classes.tab
+                  }
+                >
+                  <Typography
+                    variant="body2"
+                    className={
+                      router.pathname === "/students"
+                        ? classes.btn_active
+                        : classes.btn
+                    }
+                  >
                     Students
                   </Typography>
                   {/* <ExpandMoreIcon /> */}
                 </Button>
               </ActiveLink>
-              <Link href="/public/jobs">
-                <Button color="primary" className={classes.tab}>
-                  <Typography variant="body2" className={classes.btn}>
+              <ActiveLink href="/public/jobs">
+                <Button
+                  color="primary"
+                  className={
+                    router.pathname === "/public/jobs"
+                      ? classes.tab_active
+                      : classes.tab
+                  }
+                >
+                  <Typography
+                    variant="body2"
+                    className={
+                      router.pathname === "/public/jobs"
+                        ? classes.btn_active
+                        : classes.btn
+                    }
+                  >
                     Career Advice
                   </Typography>
                 </Button>
-              </Link>
+              </ActiveLink>
               <Link href="/">
-                <Button color="primary" className={classes.tab}>
+                {/* <Button color="primary" className={classes.tab}>
                   <Typography variant="body2" className={classes.btn}>
                     Opurtunities
                   </Typography>
-                </Button>
+                </Button> */}
+                <DropDown />
               </Link>
               <Link href="/employer">
-                <Button color="primary" className={classes.tab}>
-                  <Typography variant="body2" className={classes.btn}>
+                <Button
+                  color="primary"
+                  className={
+                    router.pathname === "/employer"
+                      ? classes.tab_active
+                      : classes.tab
+                  }
+                >
+                  <Typography
+                    variant="body2"
+                    className={
+                      router.pathname === "/employer"
+                        ? classes.btn_active
+                        : classes.btn
+                    }
+                  >
                     Company
                   </Typography>
                 </Button>
               </Link>
               <Link href="/college">
-                <Button color="primary" className={classes.tab}>
-                  <Typography variant="body2" className={classes.btn}>
+                <Button
+                  color="primary"
+                  className={
+                    router.pathname === "/college"
+                      ? classes.tab_active
+                      : classes.tab
+                  }
+                >
+                  <Typography
+                    variant="body2"
+                    className={
+                      router.pathname === "/college"
+                        ? classes.btn_active
+                        : classes.btn
+                    }
+                  >
                     Colleges
                   </Typography>
                 </Button>
               </Link>
               <Link href="/blog">
-                <Button color="primary" className={classes.tab}>
-                  <Typography variant="body2" className={classes.btn}>
+                <Button
+                  color="primary"
+                  className={
+                    router.pathname === "/blog" ||
+                    router.pathname === "/blogs/[category]"
+                      ? classes.tab_active
+                      : classes.tab
+                  }
+                >
+                  <Typography
+                    variant="body2"
+                    className={
+                      router.pathname === "/blog" ||
+                      router.pathname === "/blogs/[category]"
+                        ? classes.btn_active
+                        : classes.btn
+                    }
+                  >
                     Blog
                   </Typography>
                 </Button>
@@ -151,34 +237,22 @@ function Navbar() {
               <IconButton>
                 <SearchIcon color="inherit" />
               </IconButton>
-              <MenuItem>
-                <CustomButton
-                  onClick={() => {
-                    console.log("You Clicked on Me!");
-                  }}
-                  type="button"
-                  buttonStyle="btn--primary--solid"
-                  buttonSize="btn--medium"
-                >
-                  <Typography variant="body2" color="inherit">
-                    Register{" "}
-                  </Typography>
-                </CustomButton>
+              <MenuItem
+                style={{ color: "inherit", backgroundColor: "inherit" }}
+              >
+                {/* <RegisterButton /> */}
+                <RegisterBtn />
               </MenuItem>
-              <MenuItem style={{ paddingRight: "3px" }}>
-                <CustomButton
-                  onClick={() => {
-                    console.log("You Clicked on Me!");
-                  }}
-                  type="button"
-                  buttonStyle="btn--primary--outline"
-                  buttonSize="btn--medium"
-                >
-                  <Typography variant="body2" color="inherit">
-                    Login{" "}
-                  </Typography>
-                </CustomButton>
+              <MenuItem
+                style={{
+                  paddingRight: "3px",
+                  color: "inherit",
+                  backgroundColor: "inherit",
+                }}
+              >
+                <LogInBtn />
               </MenuItem>
+
               {/* </div> */}
             </div>
           </Hidden>

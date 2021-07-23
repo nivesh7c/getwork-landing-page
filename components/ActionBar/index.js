@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ActionBar(props) {
-  const { filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, jobRoleList, sortBy, setSortBy } = props;
+  const { filterObject, setFilterObject, filterData, setFilterData, setFilterIsApplied, jobRoleList, sortBy, setSortBy, setListData, listData } = props;
   const classes = useStyles();
 
   const handleDeleteJS = (key, arr, param_name) => {
@@ -57,10 +57,14 @@ function ActionBar(props) {
       if (item1.id === item.id) index = filterData[heading].data.indexOf(item1);
     });
     temp.splice(index, 1, item);
+    console.log("hello", temp);
     var temp2 = { ...filterData };
+    var temp_new = { ...listData };
+    temp_new[heading] = temp.slice(0, 5);
     temp2[heading].data = temp;
 
     setFilterData(temp2);
+    setListData(temp_new);
   };
 
   return (

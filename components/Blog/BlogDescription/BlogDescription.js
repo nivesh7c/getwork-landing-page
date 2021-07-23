@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -9,6 +9,9 @@ import {
 } from "@material-ui/core";
 import Image from "next/image";
 import Bloger from "../Bloger/index";
+import Link from "next/link";
+import { STRAPI_API } from "../../../constant";
+import Breadcrumbs from "nextjs-breadcrumbs";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +20,9 @@ const useStyles = makeStyles(theme => ({
   header: {
     paddingLeft: "10px",
     paddingRight: "10px",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2),
+    },
     marginTop: "100px",
   },
   companydetail: {
@@ -43,68 +49,37 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function BlogDescription() {
+export default function BlogDescription({
+  data,
+  categoryData,
+  currentIndex,
+  showNext,
+  showPrev,
+  setButtonClickedNext,
+  setButtonClickedPrev,
+  currentIndexSet,
+}) {
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(categoryData[parseInt(currentIndex - 1)]);
+  }, [data]);
+
   return (
     <>
       <Container maxWidth="lg" className={classes.header}>
-        <Typography variant="h6">All Blogs/ Students</Typography>
+        <Typography variant="h6">All Blogs/ {data?.category?.Title}</Typography>
+        <Typography variant="h2">{data?.Title}</Typography>
         <br />
-        <Typography variant="h2">
-          Hot Looks: A Fun, Random Beauty Report Straight From The Closet
-        </Typography>
-        <br />
-        <Bloger />
+        <Bloger data={data} />
         <div>
-          <img src="/png/collegebanner.png" height="100%" width="100%" />
+          <img
+            src={`${STRAPI_API}${data.Banner.url}`}
+            height="100%"
+            width="100%"
+          />
         </div>
-
-        <Typography variant="subtitle1">
-          You love having a second home but the mortgage is putting a crater in
-          your wallet. Many second home owners turn to renting their property as
-          a vacation rental to help defray the costs of ownership. How do you
-          price a vacation home rental without overcharging but making enough to
-          cover your costs? Do your research.
-          <br />
-          <br />
-          Find out what other owners of, similar sized homes in the area are
-          charging. You can ask a local real estate agent for a price range,
-          scan local papers or go online. There are also vacation rental sites
-          like eVaca.com. These types of sites have advertisements from owners
-          around the world and weekly rates for the properties are listed.
-          <br />
-          <br />
-          You also want to figure out what lengths you want to rent your
-          property for. A Florida property in July near the beach will go for
-          top dollar for a week. However, that same property in January you
-          might attract the snowbirds who want to rent at a lower price and rent
-          it out on a monthly basis. You have to answer questions like, “do I
-          want to mess around with weekend or nightly rentals” and “is it worth
-          the hassle”.
-          <br />
-          <br />
-          You love having a second home but the mortgage is putting a crater in
-          your wallet. Many second home owners turn to renting their property as
-          a vacation rental to help defray the costs of ownership. How do you
-          price a vacation home rental without overcharging but making enough to
-          cover your costs? Do your research.
-          <br />
-          <br />
-          Find out what other owners of, similar sized homes in the area are
-          charging. You can ask a local real estate agent for a price range,
-          scan local papers or go online. There are also vacation rental sites
-          like eVaca.com. These types of sites have advertisements from owners
-          around the world and weekly rates for the properties are listed.
-          <br />
-          <br />
-          You also want to figure out what lengths you want to rent your
-          property for. A Florida property in July near the beach will go for
-          top dollar for a week. However, that same property in January you
-          might attract the snowbirds who want to rent at a lower price and rent
-          it out on a monthly basis. You have to answer questions like, “do I
-          want to mess around with weekend or nightly rentals” and “is it worth
-          the hassle”.
-        </Typography>
+        <Typography variant="subtitle1">{data?.Description}</Typography>
         <br />
         <br />
         <Typography variant="h5">
@@ -114,19 +89,51 @@ export default function BlogDescription() {
         </Typography>
         <br />
         <br />
-
-        <div className={classes.btnItem}>
-          <Button className={classes.btn}>
-            <Typography variant="body2">Previous</Typography>
-          </Button>
-
-          <div
-            style={{ backgroundColor: "black", height: "1px", width: "100%" }}
-          ></div>
-          <Button className={classes.btn}>
-            <Typography variant="body2">Next</Typography>
-          </Button>
-        </div>
+        {currentIndexSet && (
+          <div className={classes.btnItem}>
+            {showPrev && (
+              <Link
+                as={`/blog/${categoryData[
+                  parseInt(currentIndex - 1)
+                ].Title.split(" ").join("_")}=${
+                  categoryData[parseInt(currentIndex - 1)].id
+                }`}
+                href="/blog/[slug]"
+              >
+                <Button
+                  className={classes.btn}
+                  onClick={() => {
+                    setButtonClickedPrev(true);
+                  }}
+                >
+                  <Typography variant="body2">Previous</Typography>
+                </Button>
+              </Link>
+            )}
+            <div
+              style={{ backgroundColor: "black", height: "1px", width: "100%" }}
+            ></div>
+            {showNext && (
+              <Link
+                as={`/blog/${categoryData[
+                  parseInt(currentIndex + 1)
+                ].Title.split(" ").join("_")}=${
+                  categoryData[parseInt(currentIndex + 1)].id
+                }`}
+                href="/blog/[slug]"
+              >
+                <Button
+                  className={classes.btn}
+                  onClick={() => {
+                    setButtonClickedNext(true);
+                  }}
+                >
+                  <Typography variant="body2">Next</Typography>
+                </Button>
+              </Link>
+            )}
+          </div>
+        )}
       </Container>
     </>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Container, Typography } from "@material-ui/core";
 import ChipBlogCard from "../BlogGrid/ChipBlogCard";
+import Blog from "../../Cards/Public/Blog";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,6 +11,9 @@ const useStyles = makeStyles(theme => ({
   header: {
     paddingLeft: "10px",
     paddingRight: "10px",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2),
+    },
     //  marginTop: '100px',
   },
   companydetail: {
@@ -18,29 +22,28 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     alignContent: "center",
     marginBottom: "50px",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
 }));
 
-export default function RecentBlog() {
+export default function RecentBlog({ data, fetchData, setButtonClicked }) {
   const classes = useStyles();
   return (
     <>
       <Container maxWidth="lg" className={classes.header}>
         <Typography variant="h2">Related Blogs</Typography>
         <Grid container spacing={3} className={classes.companydetail}>
-          <Grid item xs={12} md={3}>
-            <ChipBlogCard />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ChipBlogCard />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ChipBlogCard />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ChipBlogCard />
-          </Grid>
+          {data.slice(0, 4).map((item, index) => (
+            <Grid item md={3} xs={12}>
+              {/* <ChipBlogCard item={item} fromSlug={true} fetchData={fetchData} setButtonClicked={setButtonClicked} /> */}
+              <Blog
+                item={item}
+                fromSlug={true}
+                fetchData={fetchData}
+                setButtonClicked={setButtonClicked}
+              />
+            </Grid>
+          ))}{" "}
         </Grid>
       </Container>
     </>

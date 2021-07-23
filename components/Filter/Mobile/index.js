@@ -31,16 +31,29 @@ export default function Mobile(props) {
     setSalary,
     ppo,
     setPPO,
+    listData,
+    setListData,
   } = props;
 
   const classes = useStyles();
+
+  const checkFilterNumber = () => {
+    var count = 0;
+    Object.keys(filterObject).map((item) => {
+      if (filterObject[item].length > 0) count = count + 1;
+    });
+    if (ppo) count = count + 1;
+    if (salary && salary !== 0) count = count + 1;
+
+    return count;
+  };
 
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <div style={{ display: "flex" }}>
-            <Badge color="primary" variant="dot">
+            <Badge color="primary" badgeContent={checkFilterNumber()}>
               <DialogFilter
                 filterData={filterData}
                 filterObject={filterObject}
@@ -54,6 +67,8 @@ export default function Mobile(props) {
                 ppo={ppo}
                 salary={salary}
                 setSalary={setSalary}
+                listData={listData}
+                setListData={setListData}
               />
             </Badge>
           </div>

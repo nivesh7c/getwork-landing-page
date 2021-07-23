@@ -2,7 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper, Grid, Chip } from "@material-ui/core";
 import Image from "next/image";
-import { Link } from "@material-ui/core";
+import moment from "moment";
+import Link from "next/link";
+import { STRAPI_API } from "../../../constant";
 
 const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {
@@ -10,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: `url(${"/png/studentbg.jpg"})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     display: "flex",
@@ -20,6 +21,11 @@ const useStyles = makeStyles(theme => ({
     height: "350px",
     borderRadius: "25px",
     backgroundPosition: "center",
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.02)",
+      transition: "transform 0.2s",
+    },
   },
   overlay: {
     position: "absolute",
@@ -44,37 +50,47 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(5),
-      paddingRight: 0,
+      // paddingRight: 0,
     },
   },
 }));
-export default function FeaturedCard() {
+export default function FeaturedCard({ item }) {
   const classes = useStyles();
   return (
     <>
       <div>
-        <Paper className={classes.mainFeaturedPost}>
-          {
-            // <img
-            //   style={{ display: "none" }}
-            //   src="/png/studentbg.png"
-            //   alt="de"
-            // />
-          }
-          <div className={classes.overlay} />
-          <Grid container>
-            <Grid item md={6}>
-              <div className={classes.mainFeaturedPostContent}>
-                <Typography variant="h3" style={{ color: "white" }}>
-                  Perspiciatis unde omnis istenatus error sit
-                </Typography>
-                <Typography variant="overline" style={{ color: "white" }}>
-                  December 29, 2019
-                </Typography>
-              </div>
+        <Link
+          as={`/blog/${item?.Title.split(" ").join("_")}=${item?.id}`}
+          href="/blog/[slug]"
+        >
+          <Paper
+            className={classes.mainFeaturedPost}
+            style={{
+              backgroundImage: `url(${STRAPI_API}${item.Banner.formats.thumbnail.url})`,
+            }}
+          >
+            {
+              // <img
+              //   style={{ display: "none" }}
+              //   src="/png/studentbg.png"
+              //   alt="de"
+              // />
+            }
+            <div className={classes.overlay} />
+            <Grid container>
+              <Grid item md={6}>
+                <div className={classes.mainFeaturedPostContent}>
+                  <Typography variant="h3" style={{ color: "white" }}>
+                    {item.Title}{" "}
+                  </Typography>
+                  <Typography variant="overline" style={{ color: "white" }}>
+                    {moment(item.created_at).format("DD MMMM YYYY")}
+                  </Typography>
+                </div>
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </Link>
       </div>
     </>
   );
